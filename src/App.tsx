@@ -1,8 +1,11 @@
 import React, { Fragment } from 'react';
+import Routes from './components/Routes';
 
 function App() {
   return (
-    <Fragment></Fragment>
+    <Fragment>
+      <Routes/> 
+    </Fragment>
   );
 }
 
