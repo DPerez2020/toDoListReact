@@ -1,11 +1,14 @@
-import React, { Fragment } from 'react';
+import React from 'react';
+import { Provider } from 'react-redux';
 import Routes from './components/Routes';
+import generateStore from './redux/store'
 
 function App() {
+  const store = generateStore()
   return (
-    <Fragment>
+    <Provider store={store}>
       <Routes/> 
-    </Fragment>
+    </Provider>
   );
 }
 
