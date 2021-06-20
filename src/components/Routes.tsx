@@ -1,17 +1,29 @@
-import React from 'react';
+import React, { lazy } from 'react';
+import { useSelector } from 'react-redux';
 import {BrowserRouter as Router,Switch,Route} from "react-router-dom";
+import { AuthCheck, useAuth } from 'reactfire';
 
-import Login from '../views/Login';
-import Pokemones from '../views/Pokemones';
-import Register from '../views/Register';
-import NavBar from './NavBar';
+const Home=lazy(()=>import('../views/Home'));
+const Login=lazy(()=>import('../views/Login'));
+const Pokemones=lazy(()=>import('../views/Pokemones'));
+const Register=lazy(()=>import('../views/Register'));
+const NavBar=lazy(()=>import('./NavBar'));
 
  function Routes(){
+    const state = useSelector((store:any) => store.auth.authState)
+    const auth=useAuth();
+
      return(
-         <Router>
-             <NavBar/>
+        <AuthCheck fallback={<Login/>} auth={auth}>
+            <Router>  
+                {(state)&&
+                    <NavBar/>
+                }              
              <Switch>
-                 <Route path="/" exact>
+                <Route path="/" exact>
+                    <Home />
+                 </Route>
+                 <Route path="/login" exact>
                      <Login/>
                  </Route>
                  <Route path="/register" exact>
@@ -21,7 +33,9 @@ import NavBar from './NavBar';
                      <Pokemones/>
                  </Route>
              </Switch>
-         </Router>
+            </Router>
+      </AuthCheck>
      ); 
 }
+
 export default Routes;

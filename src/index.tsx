@@ -1,14 +1,24 @@
-import { Container } from '@material-ui/core';
 import React from 'react';
 import ReactDOM from 'react-dom';
-import App from './App';
 import reportWebVitals from './reportWebVitals';
+
+import { Container } from '@material-ui/core';
+
+import App from './App';
+
+import { FirebaseAppProvider } from 'reactfire';
+import { firebaseConfig } from './firebase-config';
+
+import 'firebase/auth';
+import 'firebase/firestore';
 
 ReactDOM.render(
   <React.StrictMode>
-    <Container>
-      <App />
-    </Container>
+    <FirebaseAppProvider firebaseConfig={firebaseConfig}>
+      <Container>
+      <App/>
+      </Container>
+    </FirebaseAppProvider>
   </React.StrictMode>,
   document.getElementById('root')
 );

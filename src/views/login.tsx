@@ -3,13 +3,22 @@ import React, { Fragment } from 'react'
 import {Grid, TextField } from '@material-ui/core';
 import Button from '@material-ui/core/Button';
 import { useForm } from 'react-hook-form';
+import { Auth } from '../models/Auth';
+
+// hooks react redux
+import {useDispatch} from 'react-redux'
+import {login} from '../redux/auth';
+import { useAuth } from 'reactfire';
 
 function Login() {
 
+    const auth=useAuth();
     const {register, formState: { errors }, handleSubmit} = useForm();
+    // declaramos displach para llamar a la acción o acciones
+    const dispatch = useDispatch()
 
-    const onSubmit = (data:any) => {
-        console.log(data)
+    const onSubmit = (data:Auth) => {
+        dispatch(login(data,auth));
     }
 
     return (

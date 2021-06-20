@@ -1,5 +1,3 @@
-import axios from "axios"
-
 // constantes
 const dataInicial = {
     array: []
@@ -21,11 +19,11 @@ export default function reducer(state = dataInicial, action:any){
 // actions
 export const obtenerPokemonsAction = () => async (dispatch:any) => {
     try {
-        const res = await axios.get('https://pokeapi.co/api/v2/pokemon?offset=0&limit=20')
-        dispatch({
-            type: GET_POKE_SUCCESS,
-            payload: res.data.results
-        })
+        // const res = await axios.get('https://pokeapi.co/api/v2/pokemon?offset=0&limit=20')
+        // dispatch({
+        //     type: GET_POKE_SUCCESS,
+        //     payload: res.data.results
+        // })
     } catch (error) {
         console.log(error)
     }
